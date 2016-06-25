@@ -1,12 +1,13 @@
-BEGIN;
 DROP DATABASE IF EXISTS gpstracker;
 CREATE DATABASE gpstracker;
 
+BEGIN;
+
 DROP TABLE if EXISTS users;
 CREATE TABLE users (
-	id SERIAL, PRIMARY KEY,
-	username VARCHAR(40), NOT NULL,
-	password bytea, NOT NULL,
+	id SERIAL PRIMARY KEY,
+	username VARCHAR(40) NOT NULL,
+	password bytea NOT NULL,
 	registeredon bigint,
 	lastlogin bigint,
 	usertype string,
@@ -15,7 +16,7 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS devices;
 CREATE TABLE devices (
-	deviceid SERIAL, PRIMARY KEY,
+	deviceid SERIAL PRIMARY KEY,
 	ownerid INT references users(id),
 	name string,
 	description TEXT,
@@ -28,7 +29,7 @@ CREATE TABLE devices (
 
 DROP TABLE IF EXISTS coordinates;
 CREATE TABLE coordinates (
-	id SERIAL, PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	deviceid int references devices(deviceid),
 	latitude double precision,
 	longitude double precision,
