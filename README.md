@@ -5,6 +5,9 @@ Server side application for:
 https://github.com/herverenault/Self-Hosted-GPS-Tracker
 
 To do:
-User-testing
-Automated Testing using Jasmine or Karma
-Angular.js front-end for dashboard and stats
+
+&nbsp;&nbsp;-User-testing
+
+&nbsp;&nbsp;-Automated Testing using Jasmine or Karma
+
+&nbsp;&nbsp;-Angular.js front-end for dashboard and stats
