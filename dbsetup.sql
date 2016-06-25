@@ -10,21 +10,21 @@ CREATE TABLE users (
 	password bytea NOT NULL,
 	registeredon bigint,
 	lastlogin bigint,
-	usertype string,
-	realname string,
+	usertype VARCHAR(20),
+	realname TEXT
 );
 
 DROP TABLE IF EXISTS devices;
 CREATE TABLE devices (
 	deviceid SERIAL PRIMARY KEY,
 	ownerid INT references users(id),
-	name string,
+	name VARCHAR(100),
 	description TEXT,
-	type string,
-	brand string,
-	model string,
+	type VARCHAR(50),
+	brand VARCHAR(50),
+	model VARCHAR(20),
 	year INT,
-	status string
+	status VARCHAR(10)
 );
 
 DROP TABLE IF EXISTS coordinates;
