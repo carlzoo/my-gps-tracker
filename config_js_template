@@ -1,0 +1,10 @@
+var config = {};
+
+config.appport=process.env.PORT || 3000; //replace with port number
+config.pghost = ""; //replace with pg host name
+config.pgport = 0; //replace with pg port number
+config.pgdb=""; //replace with pg db name
+config.pguser=""; //replace with pg username
+config.pgpass=''; //replace with pg password
+
+module.exports = config;

@@ -1,0 +1,15 @@
+{
+  "name": "gps-tracker",
+  "version": "1.0.0",
+  "description": "server side app for self-hosted gps tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carl Zhou",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "pg-promise": "^4.6.1"
+  }
+}
