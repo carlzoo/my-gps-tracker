@@ -12,7 +12,7 @@ app.get('/gps/:deviceid', function(req, res){
 	//res.send('deviceid:' + req.query.deviceid);
 	//res.send('latitude: ' + req.query.lat);
 	//res.send('longitude: ' + req.query.long);
-	var dbres=insertCoordinate(req.query.deviceid, req.query.lat,req.query.long)
+	var dbres=db.insertCoordinates(req.query.deviceid, req.query.lat,req.query.long)
 	if(dbres){
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify({ status: "fail", msg : dbres }));		

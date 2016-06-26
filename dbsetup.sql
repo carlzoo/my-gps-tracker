@@ -3,15 +3,13 @@ CREATE DATABASE gpstracker;
 
 BEGIN;
 
-DROP TABLE if EXISTS users;
-CREATE TABLE users (
+DROP TABLE IF EXISTS coordinates;
+CREATE TABLE coordinates (
 	id SERIAL PRIMARY KEY,
-	username VARCHAR(40) NOT NULL,
-	password bytea NOT NULL,
-	registeredon bigint,
-	lastlogin bigint,
-	usertype VARCHAR(20),
-	realname TEXT
+	deviceid int references devices(deviceid),
+	latitude double precision,
+	longitude double precision,
+	ts bigint
 );
 
 DROP TABLE IF EXISTS devices;
@@ -27,12 +25,16 @@ CREATE TABLE devices (
 	status VARCHAR(10)
 );
 
-DROP TABLE IF EXISTS coordinates;
-CREATE TABLE coordinates (
+DROP TABLE if EXISTS users;
+CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	deviceid int references devices(deviceid),
-	latitude double precision,
-	longitude double precision,
-	ts bigint
+	username VARCHAR(40) NOT NULL,
+	password bytea NOT NULL,
+	salt VARCHAR(32),
+	registeredon timestamp WITH TIME ZONE USING users::text::timestamptz,
+	lastlogin timestamp WITH TIME ZONE USING users::text::timestamptz,
+	usertype VARCHAR(20),
+	realname TEXT
 );
+
 COMMIT;

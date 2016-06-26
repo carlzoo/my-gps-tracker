@@ -1,6 +1,8 @@
 var config=require('./config');
 var pgp=require('pg-promise')();
 
+var db={};
+
 var cn= {
 	host:config.pghost,
 	port:config.pgport,
@@ -9,15 +11,19 @@ var cn= {
 	password:config.pgpass,
 };
 
-var db=pgp(cn);
+var dbo=pgp(cn);
 
 //query functions
-function insertCoordinate(deviceid, lat,long){
-	db.any("INSERT INTO coordinates(id,deviceID,latitude,longitude,ts) VALUES ('',$1,$2,$3,'')",[deviceid,lat,long])
+var insertCoordinates = function(deviceid, lat,long){
+	dbo.any("INSERT INTO coordinates (id,deviceID,latitude,longitude,ts) VALUES ('',$1,$2,$3,'')",[deviceid,lat,long])
 		.then(function() {
 			return 0;		
 		})
 		.catch(function (error) {
 			return error;		
 		});
-}
+};
+
+db.insertCoordinates=insertCoordinates;
+
+module.exports=db;
