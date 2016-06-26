@@ -14,8 +14,8 @@ var cn= {
 var dbo=pgp(cn);
 
 //query functions
-var insertCoordinates = function(deviceid, lat,long){
-	dbo.any("INSERT INTO coordinates (id,deviceID,latitude,longitude,ts) VALUES ('',$1,$2,$3,'')",[deviceid,lat,long])
+var insertCoordinates = function(deviceid, lat,long,ts){
+	dbo.any("INSERT INTO coordinates (deviceID,latitude,longitude,ts) VALUES ($1,$2,$3,$4)",[deviceid,lat,long,ts])
 		.then(function() {
 			return 0;		
 		})

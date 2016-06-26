@@ -22,7 +22,7 @@ CREATE TABLE devices (
 	brand VARCHAR(50),
 	model VARCHAR(20),
 	year INT,
-	status VARCHAR(10)
+	status BOOLEAN
 );
 
 DROP TABLE if EXISTS users;
