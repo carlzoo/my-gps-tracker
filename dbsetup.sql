@@ -1,18 +1,25 @@
 DROP DATABASE IF EXISTS gpstracker;
 CREATE DATABASE gpstracker;
 
+\connect gpstracker
+
 BEGIN;
 
 DROP TABLE IF EXISTS coordinates;
-CREATE TABLE coordinates (
+DROP TABLE IF EXISTS devices;
+DROP TABLE if EXISTS users;
+
+CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	deviceid int references devices(deviceid),
-	latitude double precision,
-	longitude double precision,
-	ts bigint
+	username VARCHAR(40) NOT NULL,
+	password bytea NOT NULL,
+	salt VARCHAR(32),
+	registeredon timestamp WITH TIME ZONE,
+	lastlogin timestamp WITH TIME ZONE,
+	usertype VARCHAR(20),
+	realname TEXT
 );
 
-DROP TABLE IF EXISTS devices;
 CREATE TABLE devices (
 	deviceid SERIAL PRIMARY KEY,
 	ownerid INT references users(id),
@@ -25,16 +32,12 @@ CREATE TABLE devices (
 	status BOOLEAN
 );
 
-DROP TABLE if EXISTS users;
-CREATE TABLE users (
+CREATE TABLE coordinates (
 	id SERIAL PRIMARY KEY,
-	username VARCHAR(40) NOT NULL,
-	password bytea NOT NULL,
-	salt VARCHAR(32),
-	registeredon timestamp WITH TIME ZONE USING users::text::timestamptz,
-	lastlogin timestamp WITH TIME ZONE USING users::text::timestamptz,
-	usertype VARCHAR(20),
-	realname TEXT
+	deviceid int references devices(deviceid),
+	latitude double precision,
+	longitude double precision,
+	ts bigint
 );
 
 COMMIT;
